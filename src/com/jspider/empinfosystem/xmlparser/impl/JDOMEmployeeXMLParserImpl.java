@@ -42,9 +42,8 @@ public class JDOMEmployeeXMLParserImpl implements IEmployeeXMLParser {
 		empDeptNameElement.addContent(e.getEmpDept());
 		employeeElement.addContent(empDeptNameElement);
 
-		System.out.println(new XMLOutputter(Format.getPrettyFormat()).outputString(xmlDoc));
-
-		return null;
+		String formatedXMLContent = new XMLOutputter(Format.getPrettyFormat()).outputString(xmlDoc);
+		return formatedXMLContent;
 	}
 
 	@Override
@@ -77,8 +76,8 @@ public class JDOMEmployeeXMLParserImpl implements IEmployeeXMLParser {
 			empDeptNameElement.addContent(e.getEmpDept());
 			employeeElement.addContent(empDeptNameElement);
 		}
-		System.out.println(new XMLOutputter(Format.getPrettyFormat()).outputString(xmlDoc));
-		return null;
+		String formatedXMLContent = new XMLOutputter(Format.getPrettyFormat()).outputString(xmlDoc);
+		return formatedXMLContent;
 	}
 
 }

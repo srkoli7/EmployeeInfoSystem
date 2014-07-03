@@ -1,5 +1,7 @@
 package com.jspider.empinfosystem.user;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +24,8 @@ public class User {
 		IEmployeeDao edao = EmployeeDaoFactory.getEmployeeDaoFactoryInstance().getIEmployeeDao();
 
 		System.out.print("Enter employee ID : ");
-		Employee e = edao.getEmployee(scan.nextInt());
+		int empID = scan.nextInt();
+		Employee e = edao.getEmployee(empID);
 
 		displayEmployeeInfo(e);
 		if(e!=null) {
@@ -30,7 +33,9 @@ public class User {
 			boolean xmlDownload = scan.next().equalsIgnoreCase("yes");
 			if (xmlDownload) {
 				IEmployeeXMLParser xmlParser = EmployeeXMLParserFactory.getEmployeeXMLParserFactoryInstance().getEmployeeXMLParserInstance();
-				xmlParser.generateEmployeeXML(e);
+				String formatedXMLContent = xmlParser.generateEmployeeXML(e);
+				String fileName = "emp_"+empID+".xml";
+				createXMLFile(fileName, formatedXMLContent);
 			}
 		}
 		//scan.close();
@@ -43,7 +48,8 @@ public class User {
 		List<Department> deptNameList = DepartmentDaoFactory.getDepartmentDaoFactoryInstance().getDepartmentDaoInstance().getAllDepartmentNames();
 		displayDepartmentNames(deptNameList);
 		System.out.print("\nSelect the department number : ");
-		List<Employee> empList = eDao.getEmployeesByDept(deptNameList.get(scan.nextInt()-1).getDeptName());
+		String deptName = deptNameList.get(scan.nextInt()-1).getDeptName();
+		List<Employee> empList = eDao.getEmployeesByDept(deptName);
 
 		displayEmployeeInfo(empList);
 		if(empList.size()!=0) {
@@ -51,8 +57,11 @@ public class User {
 			boolean xmlDownload = scan.next().equalsIgnoreCase("yes");
 			if (xmlDownload) {
 				IEmployeeXMLParser xmlParser = EmployeeXMLParserFactory.getEmployeeXMLParserFactoryInstance().getEmployeeXMLParserInstance();
-				xmlParser.generateEmployeeXML(empList);
+				String formatedXMLContent = xmlParser.generateEmployeeXML(empList);
+				String fileName = "emps_of_dept_"+deptName+".xml";
+				createXMLFile(fileName, formatedXMLContent);
 			}
+			
 		}
 		//scan.close();
 	}
@@ -72,12 +81,27 @@ public class User {
 			boolean xmlDownload = scan.next().equalsIgnoreCase("yes");
 			if (xmlDownload) {
 				IEmployeeXMLParser xmlParser = EmployeeXMLParserFactory.getEmployeeXMLParserFactoryInstance().getEmployeeXMLParserInstance();
-				xmlParser.generateEmployeeXML(empList);
+				String formatedXMLContent = xmlParser.generateEmployeeXML(empList);
+				String fileName = "emps_between_sal_"+(int)minSalary+"_"+(int)maxSalary+".xml";
+				createXMLFile(fileName, formatedXMLContent);			
 			}
 		}
 		//scan.close();
 	}
 
+	public void createXMLFile(String fileName,String xmlContent) {
+		String FQFN = System.getProperty("user.home")+"\\Downloads\\"+fileName;
+		try {
+			FileWriter fw = new FileWriter(FQFN);
+			fw.write(xmlContent);
+			fw.flush();
+			fw.close();
+			System.out.println("File is downloaded @ "+FQFN);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void displayEmployeeInfo(Employee emp)
 	{
 		System.out.print("\n-----------------------------------------------------------------------");
