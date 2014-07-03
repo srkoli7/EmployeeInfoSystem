@@ -8,6 +8,8 @@ import com.jspider.empinfosystem.bean.Employee;
 import com.jspider.empinfosystem.dao.IEmployeeDao;
 import com.jspider.empinfosystem.dao.factory.DepartmentDaoFactory;
 import com.jspider.empinfosystem.dao.factory.EmployeeDaoFactory;
+import com.jspider.empinfosystem.xmlparser.IEmployeeXMLParser;
+import com.jspider.empinfosystem.xmlparser.factory.EmployeeXMLParserFactory;
 
 /**
  * @author : Santosh Koli
@@ -23,7 +25,14 @@ public class User {
 		Employee e = edao.getEmployee(scan.nextInt());
 
 		displayEmployeeInfo(e);
-
+		if(e!=null) {
+			System.out.print("Do you want to download XML file?(yes/no) : ");
+			boolean xmlDownload = scan.next().equalsIgnoreCase("yes");
+			if (xmlDownload) {
+				IEmployeeXMLParser xmlParser = EmployeeXMLParserFactory.getEmployeeXMLParserFactoryInstance().getEmployeeXMLParserInstance();
+				xmlParser.generateEmployeeXML(e);
+			}
+		}
 		//scan.close();
 	}
 
@@ -37,6 +46,14 @@ public class User {
 		List<Employee> empList = eDao.getEmployeesByDept(deptNameList.get(scan.nextInt()-1).getDeptName());
 
 		displayEmployeeInfo(empList);
+		if(empList.size()!=0) {
+			System.out.print("Do you want to download XML file?(yes/no) : ");
+			boolean xmlDownload = scan.next().equalsIgnoreCase("yes");
+			if (xmlDownload) {
+				IEmployeeXMLParser xmlParser = EmployeeXMLParserFactory.getEmployeeXMLParserFactoryInstance().getEmployeeXMLParserInstance();
+				xmlParser.generateEmployeeXML(empList);
+			}
+		}
 		//scan.close();
 	}
 
@@ -50,6 +67,14 @@ public class User {
 		List<Employee> empList = eDao.getEmployeesBySalaryRange(minSalary, maxSalary);
 
 		displayEmployeeInfo(empList);
+		if(empList.size()!=0) {
+			System.out.print("Do you want to download XML file?(yes/no) : ");
+			boolean xmlDownload = scan.next().equalsIgnoreCase("yes");
+			if (xmlDownload) {
+				IEmployeeXMLParser xmlParser = EmployeeXMLParserFactory.getEmployeeXMLParserFactoryInstance().getEmployeeXMLParserInstance();
+				xmlParser.generateEmployeeXML(empList);
+			}
+		}
 		//scan.close();
 	}
 
