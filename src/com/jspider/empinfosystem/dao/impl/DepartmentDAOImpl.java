@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jspider.empinfosystem.bean.Department;
-import com.jspider.empinfosystem.dao.IDepartmentDao;
+import com.jspider.empinfosystem.dao.IDepartmentDAO;
 import com.jspider.empinfosystem.dbconnection.DBConnection;
 
 /**
@@ -17,7 +17,7 @@ import com.jspider.empinfosystem.dbconnection.DBConnection;
  * @createdDate : Jun 12, 2014
  * @projectName : assignment_1_proj
  */
-public class DepartmentDaoImpl implements IDepartmentDao {
+public class DepartmentDAOImpl implements IDepartmentDAO {
 
 	private static final String GET_DEPARTMENTS_NAMES = "select unique department_name from bje20.employees";
 

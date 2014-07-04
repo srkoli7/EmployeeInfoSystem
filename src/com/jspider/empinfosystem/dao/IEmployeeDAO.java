@@ -9,7 +9,7 @@ import com.jspider.empinfosystem.bean.Employee;
  * @createdDate : Jun 11, 2014
  * @projectName : assignment_1_proj
  */
-public interface IEmployeeDao {
+public interface IEmployeeDAO {
 	public abstract Employee getEmployee(int empID);
 	public abstract List<Employee> getEmployeesBySalaryRange(double minSalary, double maxSalary);
 	public abstract List<Employee> getEmployeesByDept(String empDept);

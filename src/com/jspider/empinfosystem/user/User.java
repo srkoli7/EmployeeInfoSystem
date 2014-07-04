@@ -7,9 +7,8 @@ import java.util.Scanner;
 
 import com.jspider.empinfosystem.bean.Department;
 import com.jspider.empinfosystem.bean.Employee;
-import com.jspider.empinfosystem.dao.IEmployeeDao;
-import com.jspider.empinfosystem.dao.factory.DepartmentDaoFactory;
-import com.jspider.empinfosystem.dao.factory.EmployeeDaoFactory;
+import com.jspider.empinfosystem.dao.IEmployeeDAO;
+import com.jspider.empinfosystem.dao.factory.DAOFactory;
 import com.jspider.empinfosystem.xmlparser.IEmployeeXMLParser;
 import com.jspider.empinfosystem.xmlparser.factory.EmployeeXMLParserFactory;
 
@@ -21,7 +20,7 @@ import com.jspider.empinfosystem.xmlparser.factory.EmployeeXMLParserFactory;
 public class User {
 	public void readEmployeeDetail() {
 		Scanner scan = new Scanner(System.in);
-		IEmployeeDao edao = EmployeeDaoFactory.getEmployeeDaoFactoryInstance().getIEmployeeDao();
+		IEmployeeDAO edao = DAOFactory.getDAOFactoryInstance().getIEmployeeDAOInstance();
 
 		System.out.print("Enter employee ID : ");
 		int empID = scan.nextInt();
@@ -43,9 +42,9 @@ public class User {
 
 	public void readEmployeesDetailsByDept() {
 		Scanner scan = new Scanner(System.in);
-		IEmployeeDao eDao = EmployeeDaoFactory.getEmployeeDaoFactoryInstance().getIEmployeeDao();
+		IEmployeeDAO eDao = DAOFactory.getDAOFactoryInstance().getIEmployeeDAOInstance();
 		System.out.print("\nDepartments");
-		List<Department> deptNameList = DepartmentDaoFactory.getDepartmentDaoFactoryInstance().getDepartmentDaoInstance().getAllDepartmentNames();
+		List<Department> deptNameList = DAOFactory.getDAOFactoryInstance().getIDepartmentDAOInstance().getAllDepartmentNames();
 		displayDepartmentNames(deptNameList);
 		System.out.print("\nSelect the department number : ");
 		String deptName = deptNameList.get(scan.nextInt()-1).getDeptName();
@@ -68,7 +67,7 @@ public class User {
 
 	public void readEmployeesDetailsBySalaryRange() {
 		Scanner scan = new Scanner(System.in);
-		IEmployeeDao eDao = EmployeeDaoFactory.getEmployeeDaoFactoryInstance().getIEmployeeDao();
+		IEmployeeDAO eDao = DAOFactory.getDAOFactoryInstance().getIEmployeeDAOInstance();
 		System.out.print("Enter minimum salary :");
 		double minSalary = scan.nextDouble();
 		System.out.print("Enter maximum salary :");

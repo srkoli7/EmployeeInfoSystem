@@ -9,7 +9,7 @@ import com.jspider.empinfosystem.bean.Department;
  * @createdDate : Jun 12, 2014
  * @projectName : assignment_1_proj
  */
-public interface IDepartmentDao {
+public interface IDepartmentDAO {
 	List<Department> getAllDepartmentNames();
 }
 
