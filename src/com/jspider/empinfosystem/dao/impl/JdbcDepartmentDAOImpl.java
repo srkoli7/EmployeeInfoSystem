@@ -17,7 +17,7 @@ import com.jspider.empinfosystem.dbconnection.DBConnection;
  * @createdDate : Jun 12, 2014
  * @projectName : assignment_1_proj
  */
-public class DepartmentDAOImpl implements IDepartmentDAO {
+public class JdbcDepartmentDAOImpl implements IDepartmentDAO {
 
 	private static final String GET_DEPARTMENTS_NAMES = "select unique department_name from bje20.employees";
 

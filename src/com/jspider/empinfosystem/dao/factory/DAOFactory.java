@@ -7,8 +7,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import com.jspider.empinfosystem.dao.IDepartmentDAO;
-import com.jspider.empinfosystem.dao.impl.DepartmentDAOImpl;
-import com.jspider.empinfosystem.dao.impl.EmployeeDAOImpl;
+import com.jspider.empinfosystem.dao.impl.JdbcDepartmentDAOImpl;
+import com.jspider.empinfosystem.dao.impl.JdbcEmployeeDAOImpl;
 
 public class DAOFactory {
 	private String DAO_FACTORY_CONFIG_FILE = "config/daofactoryconfig.properties";
@@ -21,18 +21,18 @@ public class DAOFactory {
 	public IDepartmentDAO getIDepartmentDAOInstance() {
 		String empDao = readDaoFactoryProperties().getProperty("IDepartmentDAO");
 		if(empDao.equalsIgnoreCase("DepartmentDAOImpl")) {
-			return new DepartmentDAOImpl();
+			return new JdbcDepartmentDAOImpl();
 		} else {
-			return new DepartmentDAOImpl();    // default  implementation
+			return new JdbcDepartmentDAOImpl();    // default  implementation
 		}
 	}
 	
-	public EmployeeDAOImpl getIEmployeeDAOInstance() {
+	public JdbcEmployeeDAOImpl getIEmployeeDAOInstance() {
 		String empDao = readDaoFactoryProperties().getProperty("IEmployeeDAO");
 		if(empDao.equalsIgnoreCase("EmployeeDAOImpl")) {
-			return new EmployeeDAOImpl();
+			return new JdbcEmployeeDAOImpl();
 		} else {
-			return new EmployeeDAOImpl();    // default  implementation
+			return new JdbcEmployeeDAOImpl();    // default  implementation
 		}
 	}
 

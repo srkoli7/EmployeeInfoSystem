@@ -14,7 +14,7 @@ import com.jspider.empinfosystem.dbconnection.DBConnection;
  * @createdDate : Jun 11, 2014
  * @projectName : assignment_1_proj
  */
-public class EmployeeDAOImpl implements IEmployeeDAO {
+public class JdbcEmployeeDAOImpl implements IEmployeeDAO {
 
 	private static final String GET_EMPLOYEE = "select first_name,last_name,salary,department_name from bje20.employees where employee_id = ?";  
 
